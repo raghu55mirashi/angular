@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {UserdataService} from './userdata.service'
+import {UserdataService} from './userdata.service';
+
 
 interface Alert {
   type: string;
@@ -64,7 +65,10 @@ export class AppComponent {
   alerts!: Alert[];
 
   constructor(private data: UserdataService) {
-    console.log('usedata', data.getData());
+    data.getData().subscribe((data)=>{
+      console.log('usedata', data) 
+
+    });
     
     this.reset();
   }
