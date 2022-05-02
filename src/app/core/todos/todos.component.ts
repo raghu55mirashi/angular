@@ -1,10 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {TodoList} from '../../user.model'
 
-interface TodoList{
-    id: number,
-    name: string,
-    done: boolean
-}
 
 @Component({
   selector: 'app-todos',
