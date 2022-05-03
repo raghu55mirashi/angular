@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {UserdataService} from './userdata.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 
 interface Alert {
@@ -13,24 +14,6 @@ const ALERTS: Alert[] = [{
   }, {
     type: 'info',
     message: 'This is an info alert',
-  }, {
-    type: 'warning',
-    message: 'This is a warning alert',
-  }, {
-    type: 'danger',
-    message: 'This is a danger alert',
-  }, {
-    type: 'primary',
-    message: 'This is a primary alert',
-  }, {
-    type: 'secondary',
-    message: 'This is a secondary alert',
-  }, {
-    type: 'light',
-    message: 'This is a light alert',
-  }, {
-    type: 'dark',
-    message: 'This is a dark alert',
   }
 ];
 
@@ -38,6 +21,11 @@ interface TodoList{
   id: number,
   name: string,
   done: boolean
+}
+
+interface UserData{
+  username: string,
+  email: string;
 }
 
 @Component({
@@ -52,7 +40,11 @@ export class AppComponent {
     {id: 1,name: 'task1', done: true},
     {id: 2,name: 'task2', done: true},
     {id: 3,name: 'task3', done: true},
-  ]
+  ];
+  userdata: UserData = {
+    'username': 'raghu',
+    'email': 'test@gmail.com'
+  }
 
   submitData(value:any){
     console.log(value)
@@ -79,5 +71,17 @@ export class AppComponent {
 
   reset() {
     this.alerts = Array.from(ALERTS);
+  }
+
+  loginForm = new FormGroup({
+    username: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required)
+  });
+
+  get username(){
+    return this.loginForm.get('username');
+  }
+  get email(){
+    return this.loginForm.get('email');
   }
 }
