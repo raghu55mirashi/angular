@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,8 @@ import { UsersComponent } from './core/users/users.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { CustomStyleDirective } from './custom-style.directive';
 import {HttpClientModule} from '@angular/common/http';
+import { SpinnerComponent } from './core/components/spinner/spinner.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -19,7 +22,8 @@ import {HttpClientModule} from '@angular/common/http';
     TodoItemComponent,
     UsersComponent,
     PageNotFoundComponent,
-    CustomStyleDirective
+    CustomStyleDirective,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,9 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule, 
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

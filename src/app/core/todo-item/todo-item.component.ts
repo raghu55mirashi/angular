@@ -10,9 +10,13 @@ import {TodoList} from '../../user.model'
 export class TodoItemComponent implements OnInit {
 
   @Input() mytodo!: TodoList;
-  constructor() { }
+  constructor() { 
+    
+  }
 
   ngOnInit(): void {
+    console.log('my', this.mytodo);
+
   }
 
   convertString(){

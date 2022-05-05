@@ -46,8 +46,13 @@ export class AppComponent {
     'email': 'test@gmail.com'
   }
 
+  showLoader: boolean = false;
   submitData(value:any){
     console.log(value)
+    this.showLoader = true;
+    setTimeout(()=>{
+      this.showLoader = false;
+    },5000)
   }
 
   parentComponent(value:any){

@@ -18,7 +18,7 @@ export class UserdataService {
     return this.http.get<TodoList[]>(url);
   }
 
-  deleteData(todo: TodoList): Observable<TodoList[]>{
+  deleteData(todo: TodoList): Observable<TodoList>{
     let url = `https://jsonplaceholder.typicode.com/todo/${todo.id}`;
     return this.http.delete<TodoList>(url)
   }
