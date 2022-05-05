@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {TodoList} from '../../user.model'
+import { TodoList } from '../../user.model'
+import { UserdataService } from '../../userdata.service';
 
 
 @Component({
@@ -14,9 +15,10 @@ export class TodosComponent implements OnInit {
   @Input() oldTodos!: TodoList[];
   @Output() parentComponent: EventEmitter<any> = new EventEmitter()
 
-  constructor() { }
+  constructor(private service: UserdataService) { }
 
   ngOnInit(): void {
+    this.todoList = this.oldTodos;
     // this.todoList = [
     //   {id: 1,name: 'test1', done: true},
     //   {id: 2,name: 'test2', done: true},
@@ -24,18 +26,28 @@ export class TodosComponent implements OnInit {
     // ]
     // this.todoList = ['test1', 'test2']
   }
-  
-  onChange(value: any){
+
+  onChange(value: any) {
     console.log(value)
   }
-  
-  showData(value: string){
+
+  showData(value: string) {
     this.title = value;
     this.isdisabled = false;
-    this.parentComponent.emit({"name":"raghu"});
+    this.parentComponent.emit({ "name": "raghu" });
   }
 
-  trackByTodo(index: number, todo: TodoList): number{
+  trackByTodo(index: number, todo: TodoList): number {
     return todo.id;
+  }
+
+  deleteTask(todo: TodoList) {
+    console.log('TodoList', todo);
+    this.service
+      .deleteData(todo)
+      .subscribe(() => {
+        console.log('usedata', this.oldTodos)
+        this.oldTodos = this.oldTodos.filter((i) => i.id !== todo.id)
+      });
   }
 }

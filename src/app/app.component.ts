@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {UserdataService} from './userdata.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-
+import {TodoList} from './user.model';
 
 interface Alert {
   type: string;
@@ -17,12 +17,6 @@ const ALERTS: Alert[] = [{
   }
 ];
 
-interface TodoList{
-  id: number,
-  name: string,
-  done: boolean
-}
-
 interface UserData{
   username: string,
   email: string;
@@ -36,11 +30,7 @@ interface UserData{
 export class AppComponent {
   title = 'angularTestApp';
   isTrue: boolean = true;
-  todoData: TodoList[] = [
-    {id: 1,name: 'task1', done: true},
-    {id: 2,name: 'task2', done: true},
-    {id: 3,name: 'task3', done: true},
-  ];
+  todoData: TodoList[] = [];
   userdata: UserData = {
     'username': 'raghu',
     'email': 'test@gmail.com'
@@ -63,8 +53,7 @@ export class AppComponent {
 
   constructor(private data: UserdataService) {
     data.getData().subscribe((data)=>{
-      console.log('usedata', data) 
-
+      this.todoData = data;
     });
     
     this.reset();

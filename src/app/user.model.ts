@@ -1,5 +1,5 @@
 export interface TodoList{
     id: number,
-    name: string,
+    title: string,
     done: boolean
 }

@@ -1,2 +1,1 @@
-<p>todo-item</p>
-<h3>{{mytodo.name | slice: 1: 4}}</h3>
+<h3>{{mytodo.title | slice: 1}}</h3><button class="btn btn-primary" (click)="onDelete(mytodo)">Delete</button>

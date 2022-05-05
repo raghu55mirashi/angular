@@ -6,19 +6,19 @@
 <input type="text"  value={{title}} />
 <button (click)="showData(mytitle.value)">showData</button>
 <div *ngFor="let todo of todoList; trackBy: trackByTodo">
-    <p *ngIf="todo.name === 'test1'; then ifBlock else elseBlock"></p>
+    <p *ngIf="todo.title === 'test1'; then ifBlock else elseBlock"></p>
     <ng-template #ifBlock>
-        <h6>{{todo.name}}</h6>
+        <h6>{{todo.title}}</h6>
     </ng-template>
     <ng-template #elseBlock>
-        <h1>{{todo.name}}</h1>
+        <h1>{{todo.title}}</h1>
     </ng-template>
-    <ng-template [ngIf]="todo.name == 'test2'">
-        <p>{{todo.name}}</p>
+    <ng-template [ngIf]="todo.title == 'test2'">
+        <p>{{todo.title}}</p>
     </ng-template>
 </div>
 
 <h1>Todos from parent</h1>
 <div *ngFor="let todo of oldTodos">
-    <app-todo-item [mytodo]="todo"></app-todo-item>
+    <app-todo-item [mytodo]="todo" (onDeleteTodo)="deleteTask(todo)"></app-todo-item>
 </div>
