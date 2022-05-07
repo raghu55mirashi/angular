@@ -8,9 +8,10 @@ import {TodoList} from '../../user.model'
   styleUrls: ['./todo-item.component.css']
 })
 export class TodoItemComponent implements OnInit {
-
+  place:string = '';
   @Input() mytodo!: TodoList;
-  @Output() onDeleteTodo: EventEmitter<TodoList> = new EventEmitter()
+  @Output() onDeleteTodo: EventEmitter<TodoList> = new EventEmitter();
+  @Output() onUpdateTodo: EventEmitter<TodoList> = new EventEmitter();
 
   constructor() { 
     
@@ -27,6 +28,10 @@ export class TodoItemComponent implements OnInit {
 
   onDelete(todo: TodoList){
     this.onDeleteTodo.emit(todo);
+  }
+
+  onSubmit(){
+    this.onUpdateTodo.emit(this.mytodo)
   }
 
 }

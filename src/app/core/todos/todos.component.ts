@@ -50,4 +50,12 @@ export class TodosComponent implements OnInit {
         this.oldTodos = this.oldTodos.filter((i) => i.id !== todo.id)
       });
   }
+
+  updateTodo(todo: TodoList){
+    console.log('todo', todo);
+    this.service
+      .updateData(todo)
+      .subscribe(dt => console.log(dt)
+      )
+  }
 }
