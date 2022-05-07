@@ -1,7 +1,10 @@
 <app-spinner [showLoader]="showLoader"></app-spinner>
 
-<h1 appCustomStyle>This is Angular App</h1>
-<app-todos [oldTodos]="todoData" (parentComponent)="parentComponent($event)"></app-todos>
+<h1 appCustomStyle>This is Angular App</h1><br>
+
+<app-button text="{{changeValue ? 'Close': 'Open'}}"color="{{changeValue ? 'red': 'green'}}" (btnClick)="toggleBtn()"></app-button>
+
+<app-todos *ngIf="changeValue" [oldTodos]="todoData" (parentComponent)="parentComponent($event)"></app-todos>
 
 <!-- template driven form -->
 <form #simpleForm="ngForm" (ngSubmit)="submitData(simpleForm.value)">

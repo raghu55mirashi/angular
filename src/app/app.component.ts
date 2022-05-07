@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import {UserdataService} from './userdata.service';
+import {UserdataService} from './service/userdata.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {TodoList} from './user.model';
+import {UiService} from './service/ui.service';
+import {Subscription} from 'rxjs';
 
 interface Alert {
   type: string;
@@ -37,6 +39,10 @@ export class AppComponent {
   }
 
   showLoader: boolean = false;
+
+  changeValue!: false;
+  subscription!: Subscription;
+
   submitData(value:any){
     console.log(value)
     this.showLoader = true;
@@ -51,12 +57,16 @@ export class AppComponent {
 
   alerts!: Alert[];
 
-  constructor(private data: UserdataService) {
+  constructor(private data: UserdataService, private uiService: UiService) {
     data.getData().subscribe((data)=>{
       this.todoData = data;
     });
     
     this.reset();
+
+    this.uiService.onToggle().subscribe(value =>
+      this.changeValue = value
+      )
   }
 
   close(alert: Alert) {
@@ -77,5 +87,10 @@ export class AppComponent {
   }
   get email(){
     return this.loginForm.get('email');
+  }
+
+  toggleBtn(){
+    console.log('sss');
+    this.uiService.toggleButton();
   }
 }

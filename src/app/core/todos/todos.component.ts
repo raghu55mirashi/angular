@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TodoList } from '../../user.model'
-import { UserdataService } from '../../userdata.service';
+import { UserdataService } from '../../service/userdata.service';
 
 
 @Component({
