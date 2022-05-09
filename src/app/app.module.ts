@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule, Routes} from '@angular/router';
@@ -16,6 +16,8 @@ import { PageNotFoundComponent } from './core/page-not-found/page-not-found.comp
 import { CustomStyleDirective } from './custom-style.directive';
 import { SpinnerComponent } from './core/components/spinner/spinner.component';
 import { ButtonComponent } from './core/components/button/button.component';
+import {InterceptorService} from './auth/interceptor.service';
+import { LoginComponent } from './core/login/login.component';
 
 const appRoutes: Routes = [
   {path: 'users', component: UsersComponent}
@@ -30,7 +32,8 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     CustomStyleDirective,
     SpinnerComponent,
-    ButtonComponent
+    ButtonComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,13 @@ const appRoutes: Routes = [
     NgxSpinnerModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+     }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
